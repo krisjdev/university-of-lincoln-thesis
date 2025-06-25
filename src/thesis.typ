@@ -81,7 +81,8 @@
   )
 
   set par(leading: 1.2em)
-
+  set text(size: 12pt)
+  
   _make_titlepage(title, name, studentid, degree, programme, school, supervisor, date)
 
   set page(margin: (left: 3.5cm))

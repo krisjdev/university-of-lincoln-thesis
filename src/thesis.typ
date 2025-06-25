@@ -1,5 +1,5 @@
 #let ack_body = state("ack_body", [])
-
+#let abstract_body = state("abstract_body", [])
 
 #let _make_titlepage(title, name, studentid, degree, programme, school, supervisor, date) = {
   // make title page
@@ -70,6 +70,9 @@
   date: none,
   header_text: none,
 
+  enable_acknowledgements: false,
+  enable_abstract: false,
+
   doc
   ) = {
   
@@ -108,7 +111,14 @@
 
   // reset page counter to 1 after title page
   counter(page).update(1)
-  _make_preamble_page([Acknowledgements], "acknowledgements", context ack_body.final())
+
+  if enable_acknowledgements {
+    _make_preamble_page([Acknowledgements], "acknowledgements", context ack_body.final())
+  }
+
+  if enable_abstract {
+    _make_preamble_page([Abstract], "abstract", context abstract_body.final())
+  }
 
   // TODO make abstract, toc, etc here
 
@@ -144,4 +154,8 @@
 
 #let acknowledgements(doc) = {
   context ack_body.update(doc)
+}
+
+#let abstract(doc) = {
+  context abstract_body.update(doc)
 }

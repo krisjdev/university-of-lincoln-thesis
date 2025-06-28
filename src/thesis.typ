@@ -69,7 +69,7 @@
   supervisor: none,
   date: none,
   header_text: none,
-  bibliography_path: none,
+  bib: none,
 
   enable_acknowledgements: false,
   enable_abstract: false,
@@ -83,6 +83,10 @@
 
   set par(leading: 1.2em)
   set text(size: 12pt)
+
+  set bibliography(
+    style: "harvard-cite-them-right"
+  )
   
   _make_titlepage(title, name, studentid, degree, programme, school, supervisor, date)
 
@@ -183,7 +187,7 @@
   // TODO: reset headings to remove "chapter" text
   // TODO: add custom harvard citation style to fit with lincoln requirements?
   pagebreak()
-  bibliography(bibliography_path, style: "harvard-cite-them-right")
+  bib
 }
 
 #let acknowledgements(doc) = {

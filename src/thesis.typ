@@ -69,6 +69,7 @@
   supervisor: none,
   date: none,
   header_text: none,
+  bibliography_path: none,
 
   enable_acknowledgements: false,
   enable_abstract: false,
@@ -149,8 +150,19 @@
       #parbreak()
     ]
   }
+
+  show heading.where(level: 2): this => {
+    set text(size: 18pt)
+    this
+  }
+
   counter(heading).update(0)
   doc
+
+  // TODO: reset headings to remove "chapter" text
+  // TODO: add custom harvard citation style to fit with lincoln requirements?
+  pagebreak()
+  bibliography(bibliography_path, style: "harvard-cite-them-right")
 }
 
 #let acknowledgements(doc) = {

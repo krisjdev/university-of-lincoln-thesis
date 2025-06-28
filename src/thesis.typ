@@ -170,6 +170,13 @@
     this
   }
 
+  set figure(
+    numbering: this => {
+      let heading_count = counter(heading).get()
+      numbering("1.1", heading_count.at(0), this)
+    }
+  )
+
   counter(heading).update(0)
   doc
 

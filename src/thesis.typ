@@ -165,6 +165,11 @@
     this
   }
 
+  show figure.caption: this => {
+    set par(leading: 0.8em)
+    this
+  }
+
   counter(heading).update(0)
   doc
 

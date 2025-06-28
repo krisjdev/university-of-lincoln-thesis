@@ -153,6 +153,15 @@
 
   show heading.where(level: 2): this => {
     set text(size: 18pt)
+    set block(
+      above: 3em,
+      below: 1.6em,
+    )
+    this
+  }
+
+  show heading.where(level: 3): this => {
+    set text(size: 16pt)
     this
   }
 

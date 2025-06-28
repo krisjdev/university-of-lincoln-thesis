@@ -1,0 +1,9 @@
+[package]
+name = "uol-thesis-template"
+version = "0.0.1"
+authors = ["Kristaps Jurkans <kris.jurkans@gmail.com>"]
+license = "?"
+description = "Unofficial University of Lincoln Thesis template"
+repository = "?"
+
+entrypoint = "src/thesis.typ"

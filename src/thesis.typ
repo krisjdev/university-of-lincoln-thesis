@@ -88,6 +88,13 @@
     style: "harvard-cite-them-right"
   )
   
+  set math.equation(
+    numbering: this => {
+      let heading_count = counter(heading).get()
+      numbering("1.1", heading_count.at(0), this)
+    }
+  )
+
   _make_titlepage(title, name, studentid, degree, programme, school, supervisor, date)
 
   set page(margin: (left: 3.5cm))

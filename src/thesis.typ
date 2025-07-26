@@ -151,48 +151,58 @@
 
   // different type of headings for following sections
   // follows the format "Chapter X \n Section title"
-  set heading(numbering: "1.1")
-  show heading.where(level: 1): this => {
-    set text(size: 24pt)
-    
-    [
-      Chapter #counter(heading).display("1") \
-      #this.body 
-      #parbreak()
-    ]
-  }
+  [
+    #set heading(numbering: "1.1")
+    #show heading.where(level: 1): this => {
+      set text(size: 24pt)
 
-  show heading.where(level: 2): this => {
-    set text(size: 18pt)
-    set block(
-      above: 3em,
-      below: 1.6em,
-    )
-    this
-  }
-
-  show heading.where(level: 3): this => {
-    set text(size: 16pt)
-    this
-  }
-
-  show figure.caption: this => {
-    set par(leading: 0.8em)
-    this
-  }
-
-  set figure(
-    numbering: this => {
-      let heading_count = counter(heading).get()
-      numbering("1.1", heading_count.at(0), this)
+      [
+        Chapter #counter(heading).display("1") \
+        #this.body 
+        #parbreak()
+      ]
     }
-  )
 
-  counter(heading).update(0)
-  doc
+    #show heading.where(level: 2): this => {
+      set text(size: 18pt)
+      set block(
+        above: 3em,
+        below: 1.6em,
+      )
+      this
+    }
+
+    #show heading.where(level: 3): this => {
+      set text(size: 16pt)
+      this
+    }
+
+    #show figure.caption: this => {
+      set par(leading: 0.8em)
+      this
+    }
+
+    #set figure(
+      numbering: this => {
+        let heading_count = counter(heading).get()
+        numbering("1.1", heading_count.at(0), this)
+      }
+    )
+
+    #counter(heading).update(0)
+    #doc
+  ]
 
   // TODO: reset headings to remove "chapter" text
   // TODO: add custom harvard citation style to fit with lincoln requirements?
+  [
+    #show heading.where(level: 1): this => {
+      set text(size:24pt)
+      this.body
+    }
+    #bib
+  ]
+
   pagebreak()
   bib
 }

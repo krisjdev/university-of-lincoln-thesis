@@ -1,5 +1,6 @@
 #let ack_body = state("ack_body", [])
 #let abstract_body = state("abstract_body", [])
+#let appendix_body = state("appendix_body", [])
 
 #let _make_titlepage(title, name, studentid, degree, programme, school, supervisor, date) = {
   // make title page
@@ -204,7 +205,35 @@
   ]
 
   pagebreak()
-  bib
+  [
+    #counter(heading).update(0)
+    #set heading(numbering: "A.1.1")
+
+    #show heading.where(level:1): this => {
+      set text(size:24pt)
+      [
+        Appendix #counter(heading).display() \
+        #this.body 
+        #parbreak()
+      ]
+    }
+
+    #show heading.where(level: 2): this => {
+      set text(size: 18pt)
+      set block(
+        above: 3em,
+        below: 1.6em
+      )
+      this
+    }
+
+    #show heading.where(level: 3): this => {
+      set text(size: 16pt)
+      this
+    }
+
+    #context appendix_body.final()
+  ]
 }
 
 #let acknowledgements(doc) = {
@@ -213,4 +242,8 @@
 
 #let abstract(doc) = {
   context abstract_body.update(doc)
+}
+
+#let appendix(doc) = {
+  context appendix_body.update(appendix_body.get() + doc)
 }

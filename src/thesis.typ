@@ -196,6 +196,7 @@
 
   // TODO: reset headings to remove "chapter" text
   // TODO: add custom harvard citation style to fit with lincoln requirements?
+  pagebreak()
   [
     #show heading.where(level: 1): this => {
       set text(size:24pt)

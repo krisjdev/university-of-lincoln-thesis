@@ -247,3 +247,64 @@
 #let appendix(doc) = {
   context appendix_body.update(appendix_body.get() + doc)
 }
+
+#let _make_code_block(code) = [
+  
+  // based on codedis
+  // https://github.com/AugustinWinther/codedis/blob/main/lib.typ
+  #show raw.line: this => {
+    
+    let start = 1
+    let end = this.count
+    
+    let get_stroke(line) = {
+      // for 1 line long code blocks
+      if line == start and line == end {
+        return black + 1pt
+      } else if line == start {
+        return (top: black + 1pt, x: black + 1pt)
+      } else if line == end {
+        return (bottom: black + 1pt, x: black + 1pt)
+      } else {
+        return (x: black + 1pt)
+      }
+    }
+
+    let line = this.number
+    block(
+      breakable: false,
+      width: 100%,
+      height: 2.5em,
+      spacing: 0em,
+      inset: (x: 1.2em, top: 0.8em),
+      // stroke: black + 0.5pt
+      stroke: get_stroke(line)
+    )[
+      #this
+    ]
+
+    // bring all blocks together
+    if line != end { v(-1.8em) }
+  }
+
+  #code
+]
+
+#let code(code, caption: none, label_id: none, placement: auto) = [
+
+  #show figure: this => {
+    set block(breakable: true)
+    this
+  }
+
+  #set figure(placement: placement)
+
+  #figure(
+    caption: caption
+  )[
+    #_make_code_block(code)
+  ]
+  #if label_id != none {
+    label(label_id)
+  }
+]

@@ -2,6 +2,11 @@
 #let abstract_body = state("abstract_body", [])
 #let appendix_body = state("appendix_body", [])
 
+#let thesis_has_images = state("thesis_has_images", false)
+#let thesis_has_raw = state("thesis_has_raw", false)
+#let thesis_has_tables = state("thesis_has_tables", false)
+#let thesis_has_equations = state("thesis_has_equations" ,false)
+
 #let _make_titlepage(title, name, studentid, degree, programme, school, supervisor, date) = {
   // make title page
   align(center)[
@@ -58,6 +63,30 @@
   // context ack_body.final()
   content_body
   pagebreak()
+}
+
+#let _clear_counters() = {
+
+  if counter(figure.where(kind: image)).get().at(0) > 0 {
+    thesis_has_images.update(true)
+  }
+
+  if counter(figure.where(kind: raw)).get().at(0) > 0 {
+    thesis_has_raw.update(true)
+  }
+
+  if counter(figure.where(kind: table)).get().at(0) > 0 {
+    thesis_has_tables.update(true)
+  }
+
+  if counter(math.equation).get().at(0) > 0 {
+    thesis_has_equations.update(true)
+  }
+
+  counter(figure.where(kind: image)).update(0)
+  counter(figure.where(kind: raw)).update(0)
+  counter(figure.where(kind: table)).update(0)
+  counter(math.equation).update(0)
 }
 
 #let thesis(
@@ -156,7 +185,11 @@
   // in the document
   context {
 
-    if counter(figure.where(kind: image)).final().at(0) > 0 {
+    // NOTE: could probably do away with these counters... querying the global variable
+    // might be the best way of knowing whether or not that content exists, as there is
+    // a condition where if there's only 1 of the element, it'll fail to generate the
+    // page since the counter would've reset and this check would fall through
+    if counter(figure.where(kind: image)).final().at(0) > 0 or thesis_has_images.final() {
       outline(
         title: text(size:24pt)[List of Figures],
         target: figure.where(kind: image)
@@ -164,7 +197,7 @@
       pagebreak()
     }
 
-    if counter(figure.where(kind: table)).final().at(0) > 0 {
+    if counter(figure.where(kind: table)).final().at(0) > 0 or thesis_has_tables.final() {
       outline(
         title: text(size:24pt)[List of Tables],
         target: figure.where(kind: table)
@@ -172,7 +205,7 @@
       pagebreak()
     }
 
-    if counter(figure.where(kind: raw)).final().at(0) > 0 {
+    if counter(figure.where(kind: raw)).final().at(0) > 0 or thesis_has_raw.final(){
       outline(
         title: text(size:24pt)[List of Listings],
         target: figure.where(kind: raw)
@@ -180,7 +213,7 @@
       pagebreak()
     }
 
-    if counter(math.equation).final().at(0) > 0 {
+    if counter(math.equation).final().at(0) > 0 or thesis_has_equations.final(){
       outline(
         title: text(size:24pt)[List of Equations],
         target: math.equation
@@ -216,6 +249,9 @@
         #this.body 
         #parbreak()
       ]
+
+      _clear_counters()
+
     }
 
     #show heading.where(level: 2): this => {
@@ -248,9 +284,8 @@
     #doc
   ]
 
-  // TODO: reset headings to remove "chapter" text
-  // TODO: add custom harvard citation style to fit with lincoln requirements?
   pagebreak()
+  // make bibliography
   [
     #show heading.where(level: 1): this => {
       set text(size:24pt)
@@ -274,6 +309,8 @@
             #this.body 
             #parbreak()
           ]
+
+          _clear_counters()
         }
   
         show heading.where(level: 2): this => {
@@ -289,6 +326,13 @@
           set text(size: 16pt)
           this
         }
+
+        set figure(
+          numbering: this => {
+            let heading_count = counter(heading).get()
+            numbering("A.1", heading_count.at(0), this)
+          }
+        )
 
         appendix_body.final()
       }

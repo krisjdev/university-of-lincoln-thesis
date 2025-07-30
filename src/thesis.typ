@@ -109,6 +109,7 @@
   // set up header & footer
   set page(
     header: [
+      #set text(size: 10pt)
       #align(right)[
         #text(weight: "light", emph(header_text))
       ]
@@ -116,9 +117,10 @@
 
     footer: {
       box()[
+        #set text(size: 10pt)
         _#name (#studentid) _
         #h(1fr) 
-        #context counter(page).display("i")
+        #context strong(counter(page).display("i"))
       ]
     }
   )
@@ -190,12 +192,13 @@
   context counter(page).update(1)
   set page(
     footer: [
+      #set text(size: 10pt)
       _#name (#studentid)_
       #h(1fr)
       #box()[
         #emph(context query(selector(heading.where(level: 1)).before(here())).last().body)
         #h(0.2cm)
-        #context counter(page).display("1")
+        #context strong(counter(page).display("1"))
       ]
     ]
   )

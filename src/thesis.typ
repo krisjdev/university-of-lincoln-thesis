@@ -54,7 +54,7 @@
     ]
   }
   // [= Acknowledgements <acknowledgements>]
-  heading[#title #label(heading_label)]
+  heading(outlined: false)[#title #label(heading_label)]
   // context ack_body.final()
   content_body
   pagebreak()
@@ -134,7 +134,57 @@
     _make_preamble_page([Abstract], "abstract", context abstract_body.final())
   }
 
-  // TODO make abstract, toc, etc here
+
+  show outline.entry.where(level: 1): set block(above: 2em)
+
+  // make table of contents with bold headings
+  [
+    #show outline.entry.where(level: 1): this => {
+      strong(this)
+    }
+
+    #outline(
+      title: text(size:24pt)[Table of Contents]
+    )
+    #pagebreak()
+  ]
+
+  // selectively create list of X pages depending on whether or not they exist
+  // in the document
+  context {
+
+    if counter(figure.where(kind: image)).final().at(0) > 0 {
+      outline(
+        title: text(size:24pt)[List of Figures],
+        target: figure.where(kind: image)
+      )
+      pagebreak()
+    }
+
+    if counter(figure.where(kind: table)).final().at(0) > 0 {
+      outline(
+        title: text(size:24pt)[List of Tables],
+        target: figure.where(kind: table)
+      )
+      pagebreak()
+    }
+
+    if counter(figure.where(kind: raw)).final().at(0) > 0 {
+      outline(
+        title: text(size:24pt)[List of Listings],
+        target: figure.where(kind: raw)
+      )
+      pagebreak()
+    }
+
+    if counter(math.equation).final().at(0) > 0 {
+      outline(
+        title: text(size:24pt)[List of Equations],
+        target: math.equation
+      )
+      pagebreak()
+    }
+  }
 
   // set page counter to 1, reset its style, and add the section title to the footer
   context counter(page).update(1)

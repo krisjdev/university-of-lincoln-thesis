@@ -350,7 +350,7 @@
   #code
 ]
 
-#let code(code, caption: none, label_id: none, placement: auto) = [
+#let code(code, caption: none, label_id: none, placement: auto, outlined: true) = [
 
   #show figure: this => {
     set block(breakable: true)
@@ -359,12 +359,20 @@
 
   #set figure(placement: placement)
 
-  #figure(
-    caption: caption
-  )[
-    #_make_code_block(code)
+  #if outlined [
+    #figure(caption: caption)[
+      #_make_code_block(code)
+    ]
+    #if label_id != none {
+      label(label_id)
+    }
+  ] else [
+    #figure(
+      outlined: false,
+      kind: "hidden",
+      supplement: [hidden]
+    )[
+      #_make_code_block(code)
+    ]
   ]
-  #if label_id != none {
-    label(label_id)
-  }
 ]

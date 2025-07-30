@@ -273,7 +273,7 @@
             Appendix #counter(heading).display() \
             #this.body 
             #parbreak()
-            ]
+          ]
         }
   
         show heading.where(level: 2): this => {
@@ -282,12 +282,12 @@
             above: 3em,
             below: 1.6em
           )
-            this
+          this
         }
   
         show heading.where(level: 3): this => {
           set text(size: 16pt)
-            this
+          this
         }
 
         appendix_body.final()

@@ -72,9 +72,6 @@
   header_text: none,
   bib: none,
 
-  enable_acknowledgements: false,
-  enable_abstract: false,
-
   doc
   ) = {
   
@@ -128,12 +125,16 @@
   // reset page counter to 1 after title page
   counter(page).update(1)
 
-  if enable_acknowledgements {
-    _make_preamble_page([Acknowledgements], "acknowledgements", context ack_body.final())
-  }
+  context {
 
-  if enable_abstract {
-    _make_preamble_page([Abstract], "abstract", context abstract_body.final())
+    if ack_body.final() != [] {
+      _make_preamble_page([Acknowledgements], "acknowledgements", ack_body.final())
+    }
+
+    if abstract_body.final() != [] {
+      _make_preamble_page([Abstract], "abstract", abstract_body.final())
+    }
+
   }
 
 
@@ -258,36 +259,41 @@
     #bib
   ]
 
-  pagebreak()
-  [
-    #counter(heading).update(0)
-    #set heading(numbering: "A.1.1")
 
-    #show heading.where(level:1): this => {
-      set text(size:24pt)
-      [
-        Appendix #counter(heading).display() \
-        #this.body 
-        #parbreak()
-      ]
+  context {
+    if appendix_body.final() != [] {
+      pagebreak()
+      {
+        counter(heading).update(0)
+        set heading(numbering: "A.1.1")
+  
+        show heading.where(level:1): this => {
+          set text(size:24pt)
+          [
+            Appendix #counter(heading).display() \
+            #this.body 
+            #parbreak()
+            ]
+        }
+  
+        show heading.where(level: 2): this => {
+          set text(size: 18pt)
+          set block(
+            above: 3em,
+            below: 1.6em
+          )
+            this
+        }
+  
+        show heading.where(level: 3): this => {
+          set text(size: 16pt)
+            this
+        }
+
+        appendix_body.final()
+      }
     }
-
-    #show heading.where(level: 2): this => {
-      set text(size: 18pt)
-      set block(
-        above: 3em,
-        below: 1.6em
-      )
-      this
-    }
-
-    #show heading.where(level: 3): this => {
-      set text(size: 16pt)
-      this
-    }
-
-    #context appendix_body.final()
-  ]
+  }
 }
 
 #let acknowledgements(doc) = {

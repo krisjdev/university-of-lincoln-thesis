@@ -100,6 +100,7 @@
   date: none,
   header_text: none,
   bib: none,
+  bib_style: "harvard-cite-them-right-edited.csl",
 
   doc
   ) = {
@@ -112,9 +113,11 @@
   set text(size: 12pt)
 
   set bibliography(
-    style: "harvard-cite-them-right"
+    // style: "harvard-cite-them-right"
+    // style: "harvard-cite-them-right-edited.csl"
+    style: bib_style
   )
-  
+
   set math.equation(
     numbering: this => {
       let heading_count = counter(heading).get()

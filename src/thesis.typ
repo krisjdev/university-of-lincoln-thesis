@@ -423,3 +423,15 @@
     ]
   ]
 ]
+
+#let placeholder(height: 5cm, width: 100%, colour: red) = {
+  rect(
+    height: height,
+    width: width,
+    fill: colour
+  )[
+    #align(center + horizon)[
+      #text(white, size: 16pt)[*PLACEHOLDER IMAGE*]
+    ]
+  ]
+}

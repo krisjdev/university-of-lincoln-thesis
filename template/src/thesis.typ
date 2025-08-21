@@ -25,7 +25,7 @@
 
     #v(1cm)
     #align(center)[
-      #image("/resources/logo.jpg", width: 35%)
+      #image("/template/resources/logo.jpg", width: 35%)
     ]
 
     #v(1.5cm)
@@ -287,15 +287,17 @@
     #doc
   ]
 
-  pagebreak()
   // make bibliography
-  [
-    #show heading.where(level: 1): this => {
-      set text(size:24pt)
-      this.body
-    }
-    #bib
-  ]
+  if bib != none {
+    pagebreak()
+    [
+      #show heading.where(level: 1): this => {
+        set text(size:24pt)
+        this.body
+      }
+      #bib
+    ]
+  }
 
 
   context {

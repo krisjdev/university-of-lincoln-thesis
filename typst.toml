@@ -1,9 +1,16 @@
 [package]
 name = "uol-thesis-template"
-version = "0.0.1"
+version = "1.0.0"
 authors = ["Kristaps Jurkans <kris.jurkans@gmail.com>"]
-license = "?"
-description = "Unofficial University of Lincoln Thesis template"
-repository = "?"
+license = "MIT"
+description = "An unofficial thesis template for the University of Lincoln"
+repository = "https://github.com/krisjdev/university-of-lincoln-thesis"
+keywords = ["uol", "lincoln", "university of lincoln", "UoL", "UOL"]
+categories = ["thesis"]
+entrypoint = "template/src/thesis.typ"
+exclude = ["images"]
 
-entrypoint = "src/thesis.typ"
+[template]
+path = "template"
+entrypoint = "main.typ"
+thumbnail = "images/titlepage.png"

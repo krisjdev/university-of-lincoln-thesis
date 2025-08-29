@@ -281,7 +281,7 @@
     } else {
       // with caption
       context text(
-        [#it.supplement #it.counter.display()#it.separator #it.body],
+        [#it.supplement #it.counter.display()#it.separator#it.body],
       )
     }
 

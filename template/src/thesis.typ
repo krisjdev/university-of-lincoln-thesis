@@ -273,6 +273,18 @@
       this
     }
 
+    #show figure.caption: it => if (it.body == []) {
+      // no caption
+      context text(
+        [#it.supplement #it.counter.display()],
+      )
+    } else {
+      // with caption
+      context text(
+        [#it.supplement #it.counter.display()#it.separator #it.body],
+      )
+    }
+
     #show figure.caption: this => {
       set par(leading: 0.8em)
       this

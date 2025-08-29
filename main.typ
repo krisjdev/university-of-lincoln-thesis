@@ -1,4 +1,4 @@
-#import "@preview/uol-thesis-template:1.0.0" as thesis
+#import "@preview/marina-uol-thesis:1.0.0" as thesis
 
 #show: thesis.thesis.with(
   title: "Space Ranger or Martian? Cultural Differences Across Extraterrestrial Colonies",

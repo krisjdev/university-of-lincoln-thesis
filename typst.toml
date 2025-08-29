@@ -1,9 +1,9 @@
 [package]
-name = "uol-thesis-template"
+name = "marina-uol-thesis"
 version = "1.0.0"
 authors = ["Kristaps Jurkans <kris.jurkans@gmail.com>"]
 license = "MIT"
-description = "An unofficial thesis template for the University of Lincoln"
+description = "Unofficial thesis template for the University of Lincoln"
 repository = "https://github.com/krisjdev/university-of-lincoln-thesis"
 keywords = ["uol", "lincoln", "university of lincoln", "UoL", "UOL"]
 categories = ["thesis"]

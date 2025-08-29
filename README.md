@@ -1,5 +1,5 @@
-# uol-thesis-template
-An unofficial Typst thesis template for the University of Lincoln.
+# marina-uol-thesis
+Unofficial Typst thesis template for the University of Lincoln.
 
 <p align="center">
     <img src="images/titlepage.png" width=32%>&nbsp;
@@ -9,7 +9,7 @@ An unofficial Typst thesis template for the University of Lincoln.
 
 ## Example Usage
 ```typst
-#import "@preview/uol-thesis-template:1.0.0" as thesis
+#import "@preview/marina-uol-thesis:1.0.0" as thesis
 
 #show: thesis.thesis.with(
   title: "Space Ranger or Martian? Cultural Differences Across Extraterrestrial Colonies",
@@ -122,8 +122,8 @@ It will generate a rectangle with a solid colour containing the text "PLACEHOLDE
 - `colour`: Background colour of the rectangle (default: red)
 
 ## Notices
-- Please ensure that the formatting and citation style matches the requirements set out by the University.
-- Contributions welcome!
+- Please ensure that the formatting and citation style matches the requirements set out by the University!!!
+- Contributions welcome :)
 - References within the template are to purely fictional characters from Overwatch and made-up programmes that the University does not run. It's just for a little bit of fun :P
 
 ## Licenses

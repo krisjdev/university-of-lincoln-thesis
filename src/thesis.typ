@@ -27,7 +27,7 @@
 
     #v(1cm)
     #align(center)[
-      #image("/template/resources/logo.jpg", width: 35%)
+      #image("/resources/logo.jpg", width: 35%)
     ]
 
     #v(1.5cm)
